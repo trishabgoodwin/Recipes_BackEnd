@@ -9,3 +9,13 @@ export async function createRecipe( {title, instructions, prep_time} ) {
   const {rows: recipe} = await db.query(sql, [title, instructions, prep_time])
   return recipe[0]
 }
+
+export async function getRecipes() {
+  const sql = `
+  SELECT *
+  FROM recipes;
+  `;
+  const { rows: recipes } = await db.query(sql);
+  return recipes;
+}
+
