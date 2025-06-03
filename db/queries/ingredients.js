@@ -10,3 +10,13 @@ export async function createIngredient( {name, quantity, recipe_id} ) {
   return ingredient[0]
 }
 
+export async function getIngredients() {
+  const sql = `
+  SELECT *
+  FROM ingredients;
+  `;
+  const { rows: ingredients } = await db.query(sql);
+  return ingredients;
+}
+
+
