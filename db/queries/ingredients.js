@@ -16,7 +16,7 @@ export async function getIngredients() {
   FROM ingredients;
   `;
   const { rows: ingredients } = await db.query(sql);
-  return ingredients;
+  return ingredients
 }
 
 
