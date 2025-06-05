@@ -19,4 +19,13 @@ export async function getIngredients() {
   return ingredients
 }
 
+export async function getIngredient(id) {
+  const sql = ` 
+   SELECT * 
+   FROM ingredients 
+   WHERE id = $1;
+  `
+  const { rows: ingredient } = await db.query(sql, [id])
+  return ingredient;
+}
 
