@@ -26,6 +26,6 @@ export async function getRecipe(id) {
    WHERE id = $1;
   `
   const { rows: recipe } = await db.query(sql, [id])
-  return recipe[0]
+  return recipe;
 }
 

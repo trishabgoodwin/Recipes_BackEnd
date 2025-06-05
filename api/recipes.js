@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 export default router;
 
-import { createRecipe, getRecipes } from "../db/queries/recipes.js";
+import { createRecipe, getRecipes, getRecipe } from "../db/queries/recipes.js";
 
 router.route("/").get(async (req, res) => {
   const recipes = await getRecipes();
@@ -22,7 +22,7 @@ router.route("/").post(async (req, res)=>{
 })
 
 router.route("/:id").get(async (req,res)=>{
-  const {id} = req.params.id
+  const {id} = req.params
 
   const recipe = await getRecipe(id)
 
