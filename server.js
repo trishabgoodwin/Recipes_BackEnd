@@ -14,10 +14,6 @@ app.use("/recipes", recipesRouter);
 
 app.use("/ingredients", ingredientsRouter);
 
-app.get("/", (req,res) => {
-  res.send(`Welcome to our home page.`);
-});
-
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}...`);
 });
