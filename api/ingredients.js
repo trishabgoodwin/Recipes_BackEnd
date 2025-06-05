@@ -34,5 +34,6 @@ router.route("/:id").delete(async (req,res)=>{
       return res.status(404).send({error: "That ingredient does not exist."})
     }
     
+    
     res.sendStatus(204)
 })
