@@ -19,4 +19,14 @@ export async function getIngredients() {
   return ingredients
 }
 
+export async function deleteIngredient(id) {
+  const sql = `
+    DELETE FROM ingredients WHERE id = $1 RETURNING *;
+  `
+
+  const {rows: ingredient} = await db.query(sql, [id])
+  
+  return ingredient[0]
+}
+
 

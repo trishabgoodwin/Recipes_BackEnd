@@ -29,3 +29,14 @@ export async function getRecipe(id) {
   return recipe[0]
 }
 
+export async function deleteRecipe(id) {
+  const sql = `
+    DELETE FROM recipes WHERE id = $1 RETURNING *;
+  `
+
+  const {rows: recipe} = await db.query(sql, [id])
+  
+  return recipe[0]
+}
+
+

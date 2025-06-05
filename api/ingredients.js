@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 export default router;
 
-import { createIngredient, getIngredients } from "../db/queries/ingredients.js";
+import { createIngredient, getIngredients, deleteIngredient } from "../db/queries/ingredients.js";
 
 router.route("/").get(async (req, res) => {
   const ingredients = await getIngredients();
@@ -25,3 +25,14 @@ router.route("/").post(async (req, res)=>{
   res.status(201).send(ingredient)
 })
 
+router.route("/:id").delete(async (req,res)=>{
+  const {id} = req.params
+
+  const deletes = await deleteIngredient(id)
+
+  if (!deletes){
+      return res.status(404).send({error: "That ingredient does not exist."})
+    }
+    
+    res.sendStatus(204)
+})
