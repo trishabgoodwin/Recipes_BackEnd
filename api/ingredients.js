@@ -2,7 +2,7 @@ import express from "express";
 const router = express.Router();
 export default router;
 
-import { createIngredient, getIngredients, getIngredient, deleteIngredient } from "../db/queries/ingredients.js";
+import { createIngredient, getIngredients, getIngredient, deleteIngredient, updateIngredient } from "../db/queries/ingredients.js";
 
 router.route("/").get(async (req, res) => {
   const ingredients = await getIngredients();
@@ -46,5 +46,23 @@ router.route("/:id").delete(async (req,res)=>{
     }
     
     res.sendStatus(204)
+})
+
+router.route("/:id").put(async (req,res)=>{
+    const {id} = req.params
+
+    const {name, quantity, recipe_id} = req.body
+    
+    if( !name || !quantity || !recipe_id)
+      return res.status(400).send({error: "Missing required fields."})
+
+    const recipe = await getIngredient(id)
+    if(!recipe){
+      return res.status(404).send({error: "Ingredient not found."})
+    }
+
+    const updated = await updateIngredient({id, name, quantity, recipe_id})
+    res.send(updated)
+
 })
 
